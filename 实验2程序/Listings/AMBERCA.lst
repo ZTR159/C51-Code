@@ -1,0 +1,117 @@
+C51 COMPILER V9.60.7.0   AMBERCA                                                           04/16/2024 15:46:14 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE AMBERCA
+OBJECT MODULE PLACED IN .\Objects\AMBERCA.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE AMBERCA.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\A
+                    -MBERCA.lst) OBJECT(.\Objects\AMBERCA.obj)
+
+line level    source
+
+   1          #include <regx51.h>
+   2          #include <intrins.h>
+   3          
+   4          void DelayMs(unsigned int _ms)
+   5          {
+   6   1          unsigned char i, j;
+   7   1      
+   8   1          while (_ms--)
+   9   1          {
+  10   2              _nop_();
+  11   2              i = 2;
+  12   2              j = 199;
+  13   2              do
+  14   2              {
+  15   3                  while (--j);
+  16   3              } while (--i);
+  17   2          }
+  18   1      }
+  19          char a[]={0xF9,0xA4,0xB0,0x99,0x92,0x82,0xF8,0x80,0x98};
+  20          
+  21          flag=0;
+  22          void Init()
+  23          {
+  24   1              IT0=1;
+  25   1              EX0=1;
+  26   1              IT1=1;
+  27   1              EX1=1;
+  28   1              EA=1;
+  29   1      }
+  30          
+  31          void k1() interrupt 0
+  32          {
+  33   1              
+  34   1              if(P3_2==0)
+  35   1              {
+  36   2                      DelayMs(10);
+  37   2                      flag=1;
+  38   2                      while(P3_2==0);
+  39   2              }
+  40   1              
+  41   1      }
+  42          void k2() interrupt 2
+  43          {
+  44   1              if(P3_3==0)
+  45   1              {       
+  46   2                      DelayMs(10);
+  47   2                      flag=2;
+  48   2                      while(P3_3==0);
+  49   2              }
+  50   1      }
+  51          
+  52          void goRight()
+  53          {
+  54   1              int i=0;
+C51 COMPILER V9.60.7.0   AMBERCA                                                           04/16/2024 15:46:14 PAGE 2   
+
+  55   1              while(flag==1)
+  56   1              {
+  57   2                      P1=a[i];
+  58   2                      i++;
+  59   2                      if(i>8)
+  60   2                              i=0;
+  61   2                      DelayMs(300);
+  62   2              }
+  63   1      }
+  64          
+  65          void goLeft()
+  66          {
+  67   1              int i=8;
+  68   1              while(flag==2)
+  69   1              {
+  70   2                      P1=a[i];
+  71   2                      i--;
+  72   2                      if(i<0)
+  73   2                              i=8;
+  74   2                      DelayMs(300);
+  75   2              }
+  76   1      }
+  77          
+  78          void main()
+  79          {
+  80   1              Init();
+  81   1              while(1)
+  82   1              {
+  83   2                      if(flag==1)
+  84   2                              goRight();
+  85   2                      if(flag==2)
+  86   2                              goLeft();
+  87   2              }
+  88   1      }
+  89          
+  90          
+  91          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    247    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     11    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,215 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    04/23/2024  00:53:45  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\Int.obj, .\Objects\Delay.obj TO .\Objects\Project PRINT (.\Listings\Project.m51)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\Int.obj (INT)
+  .\Objects\Delay.obj (DELAY)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  .\Objects\Project (INT)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     000FH     UNIT         ?DT?INT
+            IDATA   0017H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0003H     ABSOLUTE     
+                    0006H     000DH                  *** GAP ***
+            CODE    0013H     0003H     ABSOLUTE     
+                    0016H     07EAH                  *** GAP ***
+            CODE    0800H     008CH     UNIT         ?C_C51STARTUP
+            CODE    088CH     0051H     UNIT         ?PR?K1?INT
+            CODE    08DDH     0051H     UNIT         ?PR?K2?INT
+            CODE    092EH     0033H     UNIT         ?PR?GOUP?INT
+            CODE    0961H     0030H     UNIT         ?PR?GOLOW?INT
+            CODE    0991H     001BH     UNIT         ?PR?MAIN?INT
+            CODE    09ACH     0018H     UNIT         ?C_INITSEG
+            CODE    09C4H     0016H     UNIT         ?PR?_DELAYMS?DELAY
+            CODE    09DAH     000BH     UNIT         ?PR?INIT?INT
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\Project (INT)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?PR?K1?INT
+  +--> ?PR?_DELAYMS?DELAY
+
+*** NEW ROOT ***************************************************
+
+?PR?K2?INT
+  +--> ?PR?_DELAYMS?DELAY
+
+*** NEW ROOT ***************************************************
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  04/23/2024  00:53:45  PAGE 2
+
+
+
+?C_C51STARTUP
+  +--> ?PR?MAIN?INT
+  +--> ?C_INITSEG
+
+?PR?MAIN?INT
+  +--> ?PR?INIT?INT
+  +--> ?PR?GOUP?INT
+  +--> ?PR?GOLOW?INT
+
+?PR?GOUP?INT
+  +--> ?PR?_DELAYMS?DELAY
+
+?PR?GOLOW?INT
+  +--> ?PR?_DELAYMS?DELAY
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\Project (INT)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        INT
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  B:00A8H.7       PUBLIC        EA
+  C:0961H         PUBLIC        goLow
+  B:00B0H.2       PUBLIC        P3_2
+  C:09DAH         PUBLIC        Init
+  B:00B0H.3       PUBLIC        P3_3
+  C:088CH         PUBLIC        k1
+  D:0008H         PUBLIC        flag
+  C:092EH         PUBLIC        goUp
+  C:08DDH         PUBLIC        k2
+  C:0991H         PUBLIC        main
+  B:00A8H.0       PUBLIC        EX0
+  B:0088H.0       PUBLIC        IT0
+  B:00A8H.2       PUBLIC        EX1
+  B:0088H.2       PUBLIC        IT1
+  D:000AH         PUBLIC        a
+  D:0013H         PUBLIC        i
+  D:0015H         PUBLIC        j
+  -------         PROC          INIT
+  C:09DAH         LINE#         9
+  C:09DAH         LINE#         10
+  C:09DAH         LINE#         11
+  C:09DCH         LINE#         12
+  C:09DEH         LINE#         13
+  C:09E0H         LINE#         14
+  C:09E2H         LINE#         15
+  C:09E4H         LINE#         16
+  -------         ENDPROC       INIT
+  -------         PROC          K1
+  C:088CH         LINE#         18
+  C:08A9H         LINE#         21
+  C:08ACH         LINE#         22
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  04/23/2024  00:53:45  PAGE 3
+
+
+  C:08ACH         LINE#         23
+  C:08B3H         LINE#         24
+  C:08B6H         LINE#         25
+  C:08BCH         LINE#         26
+  C:08C2H         LINE#         27
+  C:08C2H         LINE#         29
+  -------         ENDPROC       K1
+  -------         PROC          K2
+  C:08DDH         LINE#         30
+  C:08FAH         LINE#         32
+  C:08FDH         LINE#         33
+  C:08FDH         LINE#         34
+  C:0904H         LINE#         35
+  C:0907H         LINE#         36
+  C:090DH         LINE#         37
+  C:0913H         LINE#         38
+  C:0913H         LINE#         39
+  -------         ENDPROC       K2
+  -------         PROC          GOUP
+  C:092EH         LINE#         41
+  C:092EH         LINE#         42
+  C:092EH         LINE#         44
+  C:0936H         LINE#         45
+  C:0936H         LINE#         46
+  C:093EH         LINE#         47
+  C:0946H         LINE#         48
+  C:0951H         LINE#         49
+  C:0957H         LINE#         50
+  C:095EH         LINE#         51
+  C:0960H         LINE#         52
+  -------         ENDPROC       GOUP
+  -------         PROC          GOLOW
+  C:0961H         LINE#         54
+  C:0961H         LINE#         55
+  C:0961H         LINE#         57
+  C:0969H         LINE#         58
+  C:0969H         LINE#         59
+  C:0971H         LINE#         60
+  C:0979H         LINE#         61
+  C:0982H         LINE#         62
+  C:0987H         LINE#         63
+  C:098EH         LINE#         64
+  C:0990H         LINE#         65
+  -------         ENDPROC       GOLOW
+  -------         PROC          MAIN
+  C:0991H         LINE#         67
+  C:0991H         LINE#         68
+  C:0991H         LINE#         69
+  C:0994H         LINE#         70
+  C:0994H         LINE#         71
+  C:0994H         LINE#         72
+  C:099CH         LINE#         73
+  C:099FH         LINE#         74
+  C:09A7H         LINE#         75
+  C:09AAH         LINE#         76
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        INT
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  04/23/2024  00:53:45  PAGE 4
+
+
+
+  -------         MODULE        DELAY
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:09C4H         PUBLIC        _DelayMs
+  -------         PROC          _DELAYMS
+  D:0006H         SYMBOL        _ms
+  -------         DO            
+  D:0005H         SYMBOL        i
+  D:0004H         SYMBOL        j
+  -------         ENDDO         
+  C:09C4H         LINE#         4
+  C:09C4H         LINE#         5
+  C:09C4H         LINE#         8
+  C:09CEH         LINE#         9
+  C:09CEH         LINE#         10
+  C:09CFH         LINE#         11
+  C:09D1H         LINE#         12
+  C:09D3H         LINE#         14
+  C:09D3H         LINE#         15
+  C:09D5H         LINE#         16
+  C:09D7H         LINE#         17
+  C:09D9H         LINE#         18
+  -------         ENDPROC       _DELAYMS
+  -------         ENDMOD        DELAY
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 015EH BYTE (17%) *
+******************************************************************************
+
+Program Size: data=24.0 xdata=0 code=494
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
