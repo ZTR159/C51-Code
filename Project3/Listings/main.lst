@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   MAIN                                                              04/25/2024 09:53:12 PAGE 1   
+C51 COMPILER V9.60.7.0   MAIN                                                              04/26/2024 00:52:02 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
@@ -13,69 +13,88 @@ line level    source
    3          #include "Timer1.h"
    4          #include "Delay.h"
    5          #include "MatrixKey.h"
-   6          
-   7          char dig[]={0xF9,0xA4,0xB0,0x99,0x92,0x82,0xF8,0x80,0x98};
-   8          void main()
-   9          {
-  10   1              Timer0_Init();
-  11   1              Timer1_Init();
-  12   1              P2=0x07;
-  13   1              //P0=0x01;
-  14   1              while(1)
-  15   1              {
-  16   2                      int key=MatrixKey();
-  17   2                      if(key)
-  18   2                      {
-  19   3                              key=MatrixKey();
-  20   3                              while(key);
-  21   3                              P0=0x01;
-  22   3                      }
-  23   2              }
-  24   1      }
-  25          
-  26          //unsigned int count0=0;
-  27          //void Timer0_LED()     interrupt 1
-  28          //{
-  29          //      TL0 = 0x18;                             //设置定时初始值
-  30          //      TH0 = 0xFC;                             //设置定时初始值
-  31          //      count0++;
-  32          //      if(count0%200==0)
-  33          //              P3_0=~P3_0;
-  34          //      if(count0%300==0)
-  35          //              P3_1=~P3_1;
-  36          //      if(count0%500==0)
-  37          //              P3_2=~P3_2;
-  38          //      if(count0%1000==0)
-  39          //              P3_3=~P3_3;
-  40          //      if(count0==3000)
-  41          //              count0=0;
-  42          //}
-  43          
-  44          unsigned int count1=0;
-  45          
-  46          void Timer1()   interrupt 3
-  47          {
-  48   1              TL1 = 0x18;                             //设置定时初始值
-  49   1              TH1 = 0xFC;                             //设置定时初始值
-  50   1              count1++;
-  51   1              if(count1==5)
-  52   1              {
-  53   2                      count1=0;
-  54   2                      P2--;
-C51 COMPILER V9.60.7.0   MAIN                                                              04/25/2024 09:53:12 PAGE 2   
+   6          int i=0;
+   7          int press=0;
+   8          char dig[]={0x3f, 0x06, 0x5b, 0x4f,0x66, 0x6d, 0x7d, 0x07,0x7f, 0x6f, 0x77, 0x7c,0x39, 0x5e, 0x79, 0x71};
+   9          char show[]={0,0,0,0,0,0,0,0};
+  10          void main()
+  11          {
+  12   1      //      Timer0_Init();
+  13   1              Timer1_Init();
+  14   1              P2=0x00;
+  15   1              P0=0x3f;
+  16   1              while(1)
+  17   1              {
+  18   2                      char key=MatrixKey();
+  19   2                      if(key)
+  20   2                      {
+  21   3                              
+  22   3      
+  23   3                                      int tmp=7;
+  24   3                                      while(tmp>=0)
+  25   3                                      {
+  26   4                                              show[tmp]=show[tmp-1];
+  27   4                                              tmp--;
+  28   4                                      }
+  29   3      
+  30   3      
+  31   3                              show[0]=dig[key];
+  32   3                              press++;
+  33   3                              if(press>7)
+  34   3                                      press=0;
+  35   3                      }
+  36   2                      
+  37   2              }
+  38   1      }
+  39          
+  40          //unsigned int count0=0;
+  41          //void Timer0_LED()     interrupt 1
+  42          //{
+  43          //      TL0 = 0x18;                             //设置定时初始值
+  44          //      TH0 = 0xFC;                             //设置定时初始值
+  45          //      count0++;
+  46          //      if(count0%200==0)
+  47          //              P3_0=~P3_0;
+  48          //      if(count0%300==0)
+  49          //              P3_1=~P3_1;
+  50          //      if(count0%500==0)
+  51          //              P3_2=~P3_2;
+  52          //      if(count0%1000==0)
+  53          //              P3_3=~P3_3;
+  54          //      if(count0==3000)
+C51 COMPILER V9.60.7.0   MAIN                                                              04/26/2024 00:52:02 PAGE 2   
 
-  55   2                      if(P2<0)
-  56   2                              P2=0x07;
-  57   2              }
-  58   1      }
+  55          //              count0=0;
+  56          //}
+  57          
+  58          unsigned int count1=0;
+  59          
+  60          void Timer1()   interrupt 3
+  61          {
+  62   1              TL1 = 0x18;                             //设置定时初始值
+  63   1              TH1 = 0xFC;                             //设置定时初始值
+  64   1              count1++;
+  65   1              if(count1==5)
+  66   1              {
+  67   2                      count1=0;
+  68   2                      P2--;
+  69   2                      P0=0;
+  70   2                      P0=show[i];
+  71   2                      i++;
+  72   2                      if(i>7)
+  73   2                              i=0;
+  74   2                      if(P2<0)
+  75   2                              P2=0x07;
+  76   2              }
+  77   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     85    ----
+   CODE SIZE        =    177    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =     11       2
+   DATA SIZE        =     30       3
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.
