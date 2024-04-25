@@ -1,0 +1,8 @@
+".\Objects\STARTUP.obj",
+".\Objects\main.obj",
+".\Objects\Timer0.obj",
+".\Objects\MatrixKey.obj",
+".\Objects\Delay.obj",
+".\Objects\Timer1.obj" 
+TO ".\Objects\Project" 
+PRINT(".\Listings\Project.m51")
