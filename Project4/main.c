@@ -25,23 +25,22 @@ void main()
 }
 
 
-void UART_Routine() interrupt 4
+void UARTFunction() interrupt 4
 {
 	if(RI==1)
 	{
 		char rev=SBUF;
 		RI=0;
-		if(rev>=97 && rev<=122)//小写转大写
+		if(rev>=97 && rev<=122)		//小写转大写
 		{
-			UART_SendByte(rev-32);//回传
-			str[index]=rev-32;
+			UART_SendByte(rev-32);	//回传
+			str[index]=rev-32;		//存储接收的数据
 		}
 		else
 		{
-			UART_SendByte(rev);//回传
-			str[index]=rev;
+			UART_SendByte(rev);		//回传
+			str[index]=rev;			//存储接收的数据
 		}
-		
 		index++;
 	}
 }
